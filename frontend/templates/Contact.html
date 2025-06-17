@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us</title>
+
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Tesla-Inspired CSS -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    :root {
+        --primary-color: #000000; /* Tesla Black */
+        --secondary-color: #ffffff; /* White */
+        --accent-color: #cc0000; /* Tesla Red */
+    }
+
+    body {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        background-color: var(--primary-color);
+        height: 1in;
+        box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.3);
+    }
+
+    .navbar h2 {
+        color: var(--accent-color);
+        font-weight: 700;
+        margin-right: 5%;
+    }
+
+    .nav-link {
+        font-size: larger;
+        color: var(--secondary-color);
+        transition: color 0.3s ease-in-out;
+    }
+
+    .nav-link:hover {
+        color: var(--accent-color);
+        text-decoration: underline;
+    }
+
+    .contact-container {
+        width: 50%;
+        margin: 50px auto;
+        padding: 40px;
+        background-color: #1a1a1a;
+        border: 2px solid var(--accent-color);
+        box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.3);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .contact-container h3 {
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+
+    .form-control {
+        background-color: #333;
+        color: var(--secondary-color);
+        border: 1px solid var(--accent-color);
+    }
+
+    .form-control:focus {
+        border-color: var(--accent-color);
+        box-shadow: none;
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, var(--accent-color), #ff1a1a);
+        color: var(--secondary-color);
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        margin-top: 15px;
+    }
+
+    .btn-submit:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(255, 26, 26, 0.8);
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- Tesla-Style Navigation -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <h2>Contact Us</h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contact Form -->
+  <div class="contact-container">
+    <h3>Get in Touch</h3>
+    <p>Have questions? Reach out to us.</p>
+
+    <form action="/submit_contact/" method="POST">
+      <input type="text" name="name" class="form-control mb-3" placeholder="Your Name" required>
+      <input type="email" name="email" class="form-control mb-3" placeholder="Your Email" required>
+      <textarea name="message" class="form-control mb-3" placeholder="Your Message" rows="4" required></textarea>
+      <button type="submit" class="btn btn-submit">Send Message</button>
+    </form>
+  </div>
+
+</body>
+</html>

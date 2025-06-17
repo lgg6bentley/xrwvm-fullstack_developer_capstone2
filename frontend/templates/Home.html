@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dealerships</title>
+
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Tesla-Inspired CSS -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    :root {
+        --primary-color: #000000; /* Tesla Black */
+        --secondary-color: #ffffff; /* White */
+        --accent-color: #cc0000; /* Tesla Red */
+    }
+
+    body {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        background-color: var(--primary-color);
+        height: 1in;
+        box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.3);
+    }
+
+    .navbar h2 {
+        color: var(--accent-color);
+        font-weight: 700;
+        margin-right: 5%;
+    }
+
+    .nav-link {
+        font-size: larger;
+        color: silver !important; /* Changed font color to silver */
+        transition: color 0.3s ease-in-out;
+    }
+
+    .nav-link:hover {
+        color: var(--accent-color);
+        text-decoration: underline;
+    }
+
+    .card {
+        width: 50%;
+        margin: 50px auto;
+        background-color: #1a1a1a;
+        padding: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+        border: 2px solid var(--accent-color);
+        text-align: center;
+    }
+
+    .card-img-top {
+        width: 80%;
+        margin: auto;
+        border-radius: 5px;
+    }
+
+    .banner h5 {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+
+    .btn {
+        background: linear-gradient(135deg, var(--accent-color), #ff1a1a);
+        color: var(--secondary-color);
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        margin: 10px;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(255, 26, 26, 0.8);
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- Tesla-Style Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <h2>Dealerships</h2>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'djangoapp:logout' %}">Logout</a></li>
+                    <li class="nav-item"><span class="nav-link">Welcome, {{ user.username }}</span></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'djangoapp:login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+  </nav>
+
+  <!-- Welcome Banner -->
+  <div class="card">
+    <img src="{% static 'images/car_dealership.jpg' %}" class="card-img-top" alt="Car Dealership">
+    <div class="banner">
+      <h5>Welcome to our Dealerships!</h5>
+      <a href="/dealers" class="btn">View Dealerships</a>
+    </div>
+  </div>
+
+</body>
+</html>

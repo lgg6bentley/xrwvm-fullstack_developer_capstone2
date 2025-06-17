@@ -1,0 +1,244 @@
+/* Import Montserrat font for Tesla-style sleek typography */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #000000; /* Tesla Black */
+    --secondary-color: #ffffff; /* White */
+    --accent-color: #cc0000; /* Tesla Red */
+}
+
+/* Global styles */
+body {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Centered container styling */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tesla-style buttons */
+.button {
+    background: linear-gradient(135deg, var(--accent-color), #ff1a1a);
+    color: var(--secondary-color);
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 26, 26, 0.8);
+}
+
+/* Navigation bar */
+.navitems {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav_item {
+    margin: 0 15px;
+    font-size: 20px;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav_item:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.nav-link {
+    font-size: 20px; /* Increase font size */
+    color: silver !important; /* Change font color to silver */
+    text-transform: uppercase; /* Make it bold-looking */
+    font-weight: bold; /* Ensure it's more visible */
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: var(--accent-color); /* Change to Tesla Red on hover */
+}
+
+/* Dealership Title */
+.dealership-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px;
+}
+
+/* Cards for display */
+.card {
+    border: 3px solid rgb(101, 81, 142);
+    display: flex;
+    flex-direction: column;
+    margin: 1% 5%;
+    padding: 20px;
+    background-color: #1a1a1a;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Image styling */
+img {
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Row formatting */
+.row {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Details styling */
+.details {
+    font-size: 20px;
+    color: var(--accent-color);
+    padding: 20px;
+}
+
+/* Title styling */
+.title {
+    font-size: 20px;
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    text-align: center;
+    margin: 20px;
+    padding: 5px;
+}
+
+/* Login Link Styling */
+.loginlink {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Banner section */
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Form panel styling */
+.form_panel {
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 2px 3px #999;
+    margin: auto;
+    min-width: 350px;
+    width: 80%;
+    margin-top: 3%;
+    background-color: black;
+}
+
+/* Username display */
+.username {
+    font-size: 30px;
+    color: var(--secondary-color);
+    align-self: flex-end;
+}
+
+/* Input panel formatting */
+.input_panel {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 20px;
+}
+.card {
+    color: var(--secondary-color);
+}
+/* Small header styling */
+.small_header {
+    font-size: 30px;
+    color: var(--secondary-color);
+    margin: 0.5cm;
+}
+
+/* Tesla-style icons */
+.img_icon {
+    align-self: center;
+    width: 40px;
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+
+.about-card, .card-body, .card-body p, .card-body .title, .card-body .card-text {
+    color: white !important; /* Ensures all text turns white */
+}
+
+.card-img-top {
+    width: 100%; /* Adjust width to fit container */
+    max-height: 400px; /* Limit height */
+    object-fit: cover; /* Crop image instead of stretching */
+    border: 3px solid #cc0000; /* Red border */
+    border-radius: 8px; /* Smooth corners */
+}
+
+body {
+    background-color: #111; /* Dark Tesla-like theme */
+}
+
+.card {
+    border: 2px solid #cc0000; /* Red Tesla accent */
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #cc0000, #ff1a1a);
+    border: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 26, 26, 0.8);
+}
+
+body {
+    background: url('/static/images/cybertruck_bg.png') no-repeat center center fixed;
+    background-size: cover; /* Make the image fit the screen */
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark transparent overlay */
+    z-index: 1; /* Keeps overlay behind the login box */
+}
+
+.login-box {
+    position: relative;
+    z-index: 2; /* Ensures login box appears above overlay */
+}

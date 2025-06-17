@@ -1,0 +1,71 @@
+/* 🌌 Futuristic Tesla Dark Mode */
+body {
+  background: url("https://cdn.prod.website-files.com/60ce1b7dd21cd517bb39ff20/6807a6a1715cdfb523f57749_Tesla_ModelY-p-1600.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
+  color: #eee;
+  margin: 0;
+}
+
+/* 🚀 Registration Box */
+.register-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 2rem;
+  background: rgba(18, 18, 18, 0.85); /* Semi-transparent dark overlay */
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3); /* Futuristic Tesla glow */
+  backdrop-filter: blur(10px);
+}
+
+.register-container h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #00ffff; /* Neon cyan Tesla accent */
+}
+
+/* 🔋 Input Fields */
+input {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1); /* Subtle frosted glass effect */
+  border: 1px solid #555;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: white;
+}
+
+input::placeholder {
+  color: #bbb;
+}
+
+/* ⚡ Tesla-Themed Button */
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(90deg, #00ffff, #00cccc); /* Neon gradient */
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #00cccc, #009999);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+/* 🚗 Smooth Fade-In Animation */
+.register-container {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
