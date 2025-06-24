@@ -1,0 +1,44 @@
+[
+  {
+    "make": "Tesla",
+    "model": "Model S",
+    "type": "Sedan",
+    "year": 2023,
+    "image_url": "https://www.tesla.com/sites/default/files/modelsx-new/social/model-s-hero-social.jpg"
+  },
+  {
+    "make": "Tesla",
+    "model": "Model 3",
+    "type": "Sedan",
+    "year": 2022,
+    "image_url": "https://www.tesla.com/sites/default/files/images/model3/social/model-3-hero-social.jpg"
+  },
+  {
+    "make": "Tesla",
+    "model": "Model X",
+    "type": "SUV",
+    "year": 2023,
+    "image_url": "https://www.tesla.com/sites/default/files/modelsx-new/social/model-x-social.jpg"
+  },
+  {
+    "make": "Tesla",
+    "model": "Model Y",
+    "type": "SUV",
+    "year": 2023,
+    "image_url": "https://www.tesla.com/sites/default/files/modelsx-new/social/model-y-social.jpg"
+  },
+  {
+    "make": "Tesla",
+    "model": "Cybertruck",
+    "type": "TRUCK",
+    "year": 2023,
+    "image_url": "https://www.tesla.com/sites/default/files/cybertruck/social/cybertruck-social.jpg"
+  },
+  {
+    "make": "Tesla",
+    "model": "Roadster",
+    "type": "Coupe",
+    "year": 2020,
+    "image_url": "https://www.tesla.com/sites/default/files/images/roadster/roadster-social.jpg"
+  }
+]

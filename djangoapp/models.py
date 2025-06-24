@@ -1,25 +1,65 @@
-# Uncomment the following imports before adding the Model code
+from django.db import models
+from django.utils import timezone
 
-# from django.db import models
-# from django.utils.timezone import now
-# from django.core.validators import MaxValueValidator, MinValueValidator
+# CarMake model
+class CarMake(models.Model):
+    """
+    Represents a car manufacturer.
+    """
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+        help_text="The name of the car make (e.g., 'Ford', 'Toyota')."
+    )
+    description = models.TextField(
+        blank=True,
+        help_text="A brief description of the car make."
+    )
 
+    def __str__(self):
+        return self.name
 
-# Create your models here.
+# CarModel model
+class CarModel(models.Model):
+    """
+    Represents a specific model of a car, linked to a CarMake.
+    """
+    CAR_TYPES = [
+        ('SEDAN', 'Sedan'),
+        ('SUV', 'SUV'),
+        ('WAGON', 'Wagon'),
+        ('COUPE', 'Coupe'),
+        ('SPORTS', 'Sports Car'),
+        ('TRUCK', 'Truck'),
+        ('VAN', 'Van'),
+        ('ELECTRIC', 'Electric Vehicle'),
+        ('HYBRID', 'Hybrid Vehicle'),
+        ('LUXURY', 'Luxury Car'),
+        ('OTHER', 'Other'),
+    ]
 
-# <HINT> Create a Car Make model `class CarMake(models.Model)`:
-# - Name
-# - Description
-# - Any other fields you would like to include in car make model
-# - __str__ method to print a car make object
+    carmake = models.ForeignKey(
+        CarMake,
+        on_delete=models.CASCADE,
+        default=1,  # Be sure a CarMake with ID=1 exists
+        help_text="The car make this model belongs to."
+    )
+    name = models.CharField(
+        max_length=100,
+        help_text="The name of the car model (e.g., 'Focus', 'Camry')."
+    )
+    type = models.CharField(
+        max_length=20,
+        choices=CAR_TYPES,
+        default='SEDAN',
+        help_text="The type of car (e.g., 'SUV', 'Sedan')."
+    )
+    year = models.IntegerField(
+        help_text="The manufacturing year of the car model."
+    )
 
+    def __str__(self):
+        return f"{self.carmake.name} - {self.name} ({self.year})"
 
-# <HINT> Create a Car Model model `class CarModel(models.Model):`:
-# - Many-To-One relationship to Car Make model (One Car Make has many
-# Car Models, using ForeignKey field)
-# - Name
-# - Type (CharField with a choices argument to provide limited choices
-# such as Sedan, SUV, WAGON, etc.)
-# - Year (IntegerField) with min value 2015 and max value 2023
-# - Any other fields you would like to include in car model
-# - __str__ method to print a car make object
+    class Meta:
+        unique_together = ('carmake', 'name', 'year')

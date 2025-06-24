@@ -13,6 +13,9 @@ services:
 
   # Node api service
   api:
+    build:
+      context: ../../../  # Adjust path to the project root if needed
+      dockerfile: server/database/Dockerfile
     image: nodeapp
     ports:
       - 3030:3030

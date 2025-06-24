@@ -28,4 +28,5 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path("logout/", views.logout_user, name="logout"),
     path("login/", views.login_page, name="login"),
+    path('api/', include('djangoapp.api_urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

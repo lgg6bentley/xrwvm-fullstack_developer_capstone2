@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  color: rgb(8, 8, 8);
+}
+
+.output-box {
+  background: #f4f4f4;
+  color: #000;
+  padding: 10px;
+  font-family: monospace;
+}

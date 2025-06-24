@@ -1,13 +1,10 @@
-# from django.contrib import admin
-# from .models import related models
-
+from django.contrib import admin
+from .models import CarMake, CarModel
 
 # Register your models here.
 
-# CarModelInline class
+# Registering CarMake model with the admin site
+admin.site.register(CarMake)
 
-# CarModelAdmin class
-
-# CarMakeAdmin class with CarModelInline
-
-# Register models here
+# Registering CarModel model with the admin site
+admin.site.register(CarModel)
