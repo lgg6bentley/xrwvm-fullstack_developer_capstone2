@@ -7,10 +7,10 @@ from django.views.decorators.csrf import csrf_exempt
 import logging
 import json
 from .models import CarMake, CarModel
-# Ensure utils.py exists in the same directory as this file.
-from .utils import initiate  # Ensure you have this defined
+from .utils import initiate
+from .restapis import get_request, analyze_review_sentiments
 from rest_framework import viewsets
-# from .serializers import CarModelSerializer  # Enable when needed
+from .restapis import get_request, analyze_review_sentiments, post_review
 
 logger = logging.getLogger(__name__)
 
@@ -77,23 +77,70 @@ def home(request):
 def login_page(request):
     return render(request, "login.html")
 
-def get_dealerships(request):
-    return render(request, "dealerships.html")
+def get_dealerships(request, state="All"):
+    endpoint = "/fetchDealers" if state.lower() == "all" else f"/fetchDealers/{state}"
+    dealerships = get_request(endpoint)
+    return JsonResponse({"status": 200, "dealers": dealerships if dealerships else []})
+
+def get_dealer_details(request, dealer_id):
+    if dealer_id:
+        endpoint = f"/fetchDealer/{dealer_id}"
+        dealership = get_request(endpoint)
+        return JsonResponse({"status": 200, "dealer": dealership})
+    else:
+        return JsonResponse({"status": 400, "message": "Bad Request"})
 
 def get_dealer_reviews(request, dealer_id):
-    reviews = [
-        {
-            "name": "Lion Reames",
-            "dealership": dealer_id,
-            "review": "Expanded global groupware",
-            "purchase": True,
-            "purchase_date": "10/20/2020",
-            "car_make": "Mazda",
-            "car_model": "MX-5",
-            "car_year": 2003,
-        }
-    ]
-    return JsonResponse(reviews, safe=False)
+    if dealer_id:
+        endpoint = f"/fetchReviews/dealer/{dealer_id}"
+        reviews = get_request(endpoint)
+
+        if reviews:
+            for review_detail in reviews:
+                response = analyze_review_sentiments(review_detail.get('review', ''))
+                print(response)
+                review_detail['sentiment'] = response.get('sentiment', 'unknown')
+
+        return JsonResponse({"status": 200, "reviews": reviews if reviews else []})
+    else:
+        return JsonResponse({"status": 400, "message": "Bad Request"})
+
+@csrf_exempt
+def add_review(request):
+    if request.method == "POST":
+        if request.content_type == "application/json":
+            try:
+                data = json.loads(request.body)
+                review_text = data.get("review")
+                dealer_id = data.get("dealer_id")
+            except json.JSONDecodeError:
+                return JsonResponse({"error": "Invalid JSON format"}, status=400)
+        else:
+            review_text = request.POST.get("review")
+            dealer_id = request.POST.get("dealer_id")
+
+        if review_text and dealer_id:
+            return JsonResponse({"message": "Review submitted!", "dealer_id": dealer_id})
+        return JsonResponse({"error": "Incomplete review data"}, status=400)
+
+    return JsonResponse({"error": "Invalid request method"}, status=400)
+
+def get_cars(request):
+    count = CarMake.objects.count()
+    print(f"CarMake count: {count}")
+
+    if count == 0:
+        initiate()
+
+    car_models = CarModel.objects.select_related('carmake')
+    cars = []
+    for car_model in car_models:
+        cars.append({
+            "CarModel": car_model.name,
+            "CarMake": car_model.carmake.name
+        })
+
+    return JsonResponse({"CarModels": cars})
 
 def fetch_dealers(request):
     dealers = [
@@ -120,47 +167,13 @@ def fetch_dealers_by_state(request, state):
     ] if state.lower() == "kansas" else []
     return JsonResponse(filtered, safe=False)
 
-def get_dealer_details(request, dealer_id):
-    context = {"dealer_id": dealer_id}
-    return render(request, "dealer_details.html", context)
-
-@csrf_exempt
 def add_review(request):
-    if request.method == "POST":
-        if request.content_type == "application/json":
-            try:
-                data = json.loads(request.body)
-                review_text = data.get("review")
-                dealer_id = data.get("dealer_id")
-            except json.JSONDecodeError:
-                return JsonResponse({"error": "Invalid JSON format"}, status=400)
-        else:
-            review_text = request.POST.get("review")
-            dealer_id = request.POST.get("dealer_id")
-
-        if review_text and dealer_id:
-            return JsonResponse({"message": "Review submitted!", "dealer_id": dealer_id})
-        return JsonResponse({"error": "Incomplete review data"}, status=400)
-
-    return JsonResponse({"error": "Invalid request method"}, status=400)
-
-# ... existing views above ...
-
-from .utils import initiate  # If not already there
-
-def get_cars(request):
-    count = CarMake.objects.count()
-    print(f"CarMake count: {count}")
-
-    if count == 0:
-        initiate()
-
-    car_models = CarModel.objects.select_related('carmake')
-    cars = []
-    for car_model in car_models:
-        cars.append({
-            "CarModel": car_model.name,
-            "CarMake": car_model.carmake.name
-        })
-
-    return JsonResponse({"CarModels": cars})
+    if(request.user.is_anonymous == False):
+        data = json.loads(request.body)
+        try:
+            response = post_review(data)
+            return JsonResponse({"status":200})
+        except:
+            return JsonResponse({"status":401,"message":"Error in posting review"})
+    else:
+        return JsonResponse({"status":403,"message":"Unauthorized"})
